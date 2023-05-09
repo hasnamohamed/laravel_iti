@@ -22,8 +22,8 @@
             <td>{{$post['posted_by']}}</td>
             <td>{{$post['created_at']}}</td>
             <td>
-                <button type="submit" class="btn btn-info">View</button>
-                <button type="submit" class="btn btn-primary">Edit</button>
+                <a href="{{route('posts.show',$post['id'])}}" type="submit" class="btn btn-info">View</a>
+                <a href="{{route('posts.edit',$post['id'])}}" type="submit" class="btn btn-primary">Edit</a>
                 <form method="post"  action="{{route('posts.destroy', $post['id'])}}">
                     @method('delete')
                     @csrf

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -35,9 +36,10 @@ class userController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show($id)
     {
-        //
+        $posts=Post::all()->where('posted_by','=',$id);
+        return view('users.show',compact('posts'));
     }
 
     /**

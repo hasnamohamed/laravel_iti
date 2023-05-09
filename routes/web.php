@@ -18,6 +18,7 @@ Route::get('/create', function () {
     return view('create');
 });
 Route::get('/users',[userController::class,'index']);
+Route::get('/users/{id}',[userController::class,'show'])->name('users.show');
 Route::get('/', function () {
     return view('home');
 });
