@@ -17,7 +17,7 @@ class CommentController extends Controller
     {
         $users=User::all();
         $posts=Post::all();
-        $comments=Post::all();
+        $comments=Comment::all();
         return view('comments.comments',compact('comments','posts','users'));
     }
 
