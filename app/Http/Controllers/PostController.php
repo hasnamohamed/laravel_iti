@@ -16,9 +16,13 @@ class PostController extends Controller
     public function index()
     {
         $posts=Post::all();
-//        $date= $post->created_at;
 //        $date = Carbon::parse($date);
 //        $date->format('d.m.Y');  //01.12.2016
+        foreach ($posts as $post)
+        {
+            $post['created_at']=Carbon::parse($post['created_at']);
+            $post['created_at']->format('d.m.Y');
+        }
         return view('posts.posts',compact('posts'));
     }
 
