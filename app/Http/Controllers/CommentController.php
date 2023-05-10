@@ -7,7 +7,7 @@ use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Post;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Auth;
 class CommentController extends Controller
 {
     /**
@@ -15,10 +15,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $users=User::all();
         $posts=Post::all();
-        $comments=Comment::all();
-        return view('comments.comments',compact('comments','posts','users'));
+        return view('posts.posts',compact('posts'));
     }
 
     /**
@@ -30,17 +28,15 @@ class CommentController extends Controller
         $users=User::all();
         return view('comments.create',compact('users','posts'));
     }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreCommentRequest $request)
     {
-        $data=$request->all();
-        Comment::create($data);
-        return redirect()->route('comments.index');
+        $post=Post::find($request->post_id);
+        $post->comments()->create(['comment' =>$request->comment, 'user_id' => Auth::id()]);
+        return redirect()->route('posts.show',$post);
     }
-
     /**
      * Display the specified resource.
      */

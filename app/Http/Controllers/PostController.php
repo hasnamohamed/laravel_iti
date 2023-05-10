@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -16,8 +18,6 @@ class PostController extends Controller
     public function index()
     {
         $posts=Post::all();
-//        $date = Carbon::parse($date);
-//        $date->format('d.m.Y');  //01.12.2016
         foreach ($posts as $post)
         {
             $post['created_at']=Carbon::parse($post['created_at']);
@@ -51,7 +51,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post=Post::findOrFail($id);
-        return view('posts.show',compact('post'));
+        return view('posts.show',compact('post',));
     }
 
     /**
@@ -80,5 +80,25 @@ class PostController extends Controller
     {
         $post->delete();
         return redirect()->route('posts.index');
+        //$flight->forceDelete();
     }
+    public function restore($id){
+        Post::withTrashed()->find($id)->restore();
+        return redirect()->route('posts.index');
+    }
+    public function restoreAll()
+    {
+        Post::onlyTrashed()->restore();
+        return redirect()->route('posts.index');
+    }
+    function deletedPosts(){
+       $posts=Post::onlyTrashed()->get();
+        return view('posts.deleted',compact('posts'));
+    }
+    public function forceDelete(Post $post)
+    {
+        $post->forceDelete();
+        return redirect()->route('posts.deleted');
+    }
+
 }

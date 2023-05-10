@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\userController;
 use \App\Http\Controllers\PostController;
+use \App\Http\Controllers\CommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,16 +14,20 @@ use \App\Http\Controllers\PostController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::resource('posts',PostController::class);
-Route::get('/create', function () {
-    return view('create');
-});
-Route::get('/users',[userController::class,'index']);
-Route::get('/users/{id}',[userController::class,'show'])->name('users.show');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('/', function () {
     return view('home');
 });
+Route::resource('posts',PostController::class);
+Route::get('post/deleted', [PostController::class, 'deletedPosts'])->name('posts.deleted');
+Route::delete('post/deleted/{id}',[PostController::class, 'forceDelete'])->name('posts.forceDelete');
+Route::get('post/restore/one/{id}', [PostController::class, 'restore'])->name('posts.restore');
+Route::get('restoreAll', [PostController::class, 'restoreAll'])->name('posts.restore.all');
+
+Route::resource('comments',CommentController::class);
+Route::get('/users',[userController::class,'index']);
+Route::get('/users/{id}',[userController::class,'show'])->name('users.show');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
