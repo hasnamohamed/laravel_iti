@@ -36,7 +36,9 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $request)
     {
-        //
+        $data=$request->all();
+        Comment::create($data);
+        return redirect()->route('comments.index');
     }
 
     /**
@@ -44,7 +46,7 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        //
+        return view('comments.show',compact('comment'));
     }
 
     /**
@@ -52,7 +54,7 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-        //
+        return view('comments.edit',compact('comment'));
     }
 
     /**
@@ -60,7 +62,8 @@ class CommentController extends Controller
      */
     public function update(UpdateCommentRequest $request, Comment $comment)
     {
-        //
+        $comment->update($request->all());
+        return redirect()->route('comments.index');
     }
 
     /**
@@ -68,6 +71,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
+        return redirect()->route('comments.index');
     }
 }
