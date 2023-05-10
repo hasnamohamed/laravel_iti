@@ -1,6 +1,6 @@
 {{--@extends('layouts.app')--}}
 
-@extends("layouts.navbar")
+@extends("layouts.app")
 
 @section('title')
     Create
@@ -40,6 +40,7 @@
             </div>
         </section>
     </form>
+
     <section style="background-color: #eee;">
         <div class="container my-5 py-5">
             <div class="row d-flex justify-content-center">

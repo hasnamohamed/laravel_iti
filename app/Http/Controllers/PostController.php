@@ -9,6 +9,7 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class PostController extends Controller
 {
@@ -51,6 +52,10 @@ class PostController extends Controller
     public function show($id)
     {
         $post=Post::findOrFail($id);
+//        $post->title= Attribute::make(
+//            get: fn (string $title) => ucfirst($post->title),
+//        );
+//        dd($post->title);
         return view('posts.show',compact('post',));
     }
 

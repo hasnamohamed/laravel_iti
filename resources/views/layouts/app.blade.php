@@ -20,6 +20,19 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="">ITI Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url('/posts')}}">All Posts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url('/users')}}">All Users</a>
+                        </li>
+                    </ul>
+                </div>
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>

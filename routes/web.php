@@ -19,11 +19,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/', function () {
     return view('home');
 });
-Route::resource('posts',PostController::class);
-Route::get('post/deleted', [PostController::class, 'deletedPosts'])->name('posts.deleted');
-Route::delete('post/deleted/{id}',[PostController::class, 'forceDelete'])->name('posts.forceDelete');
-Route::get('post/restore/one/{id}', [PostController::class, 'restore'])->name('posts.restore');
-Route::get('restoreAll', [PostController::class, 'restoreAll'])->name('posts.restore.all');
+Route::resource('posts',PostController::class)->middleware('auth');
+Route::get('post/deleted', [PostController::class, 'deletedPosts'])->name('posts.deleted')->middleware('auth');
+Route::delete('post/deleted/{id}',[PostController::class, 'forceDelete'])->name('posts.forceDelete')->middleware('auth');
+Route::get('post/restore/one/{id}', [PostController::class, 'restore'])->name('posts.restore')->middleware('auth');
+Route::get('restoreAll', [PostController::class, 'restoreAll'])->name('posts.restore.all')->middleware('auth');
 
 Route::resource('comments',CommentController::class);
 Route::get('/users',[userController::class,'index']);

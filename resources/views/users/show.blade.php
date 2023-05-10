@@ -1,4 +1,4 @@
-@extends("layouts.navbar")
+@extends("layouts.app")
 @section('title')
     Posts of the user
 @endsection

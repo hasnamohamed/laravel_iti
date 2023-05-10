@@ -1,4 +1,4 @@
-@extends("layouts.navbar")
+@extends("layouts.app")
 @section('title')
     Posts
 @endsection
@@ -22,6 +22,7 @@
     </thead>
     <tbody>
     @foreach($posts as $post)
+
         <tr>
             <th scope="row">{{$post['id']}}</th>
             <td>{{$post['title']}}</td>
@@ -48,7 +49,6 @@
 </table>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-
     <script type="text/javascript">
         $('.show-alert-delete-box').click(function(event){
             var form =  $(this).closest("form");

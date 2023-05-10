@@ -1,4 +1,4 @@
-@extends("layouts.navbar")
+@extends("layouts.app")
 @section('title')
     Create
 @endsection
