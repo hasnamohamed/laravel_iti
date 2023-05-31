@@ -11,6 +11,7 @@ class Post extends Model
     use SoftDeletes;
     use HasFactory;
     protected $fillable=['title','description','posted_by'];
+    
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
